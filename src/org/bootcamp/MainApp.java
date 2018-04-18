@@ -8,8 +8,8 @@ public class MainApp {
         final Bus stevesBus = new Bus(3, 100000, true, 31);
         final Tipper petersTipper = new Tipper(6, 80000, false, 15);
 
-        final InsurancePolicyCalculate calculate = InsurancePolicyCalculate.INSTANCE;
-
+        //final InsurancePolicyCalculate calculate = InsurancePolicyCalculate.INSTANCE;
+        /*
         final int joesInsurancePolicyCost = calculate.calculate(joesCar);
         final int stevesInsurancePolicyCost = calculate.calculate(stevesBus);
         final int petersInsurancePolicyCost = calculate.calculate(petersTipper);
@@ -18,6 +18,15 @@ public class MainApp {
         /*if(joesCar.isDiesel()){
             joesInsurancePolicyCost +=500;
         }*/
+        final InsurancePolicyCalculate calculate = InsurancePolicyCalculate.INSTANCE;
+
+        final Formula CarBasicFormula = new CarBasicFormula();
+        final Formula BusBasicFormula = new BusBasicFormula();
+        final Formula TipperBasicFormula = new TipperBasicFormula();
+
+        final int joesInsurancePolicyCost = calculate.calculate(joesCar, CarBasicFormula);
+        final int stevesInsurancePolicyCost = calculate.calculate(stevesBus, BusBasicFormula);
+        final int petersInsurancePolicyCost = calculate.calculate(petersTipper, TipperBasicFormula);
 
         System.out.println("Joe's policy cost is " + joesInsurancePolicyCost);
         System.out.println("Steve's policy cost is " + stevesInsurancePolicyCost);
