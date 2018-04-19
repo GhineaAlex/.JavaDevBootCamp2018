@@ -8,40 +8,36 @@ import org.bootcamp.vehicle.Tipper;
 
 import org.bootcamp.formula.FormulaEnum;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
+import java.nio.file.FileSystemNotFoundException;
+import java.util.Scanner;
+
 public class MainApp {
 
     public static void main(String[] args) {
 
-        final Car joesCar = new Car(5, 200000, true, "auto");
-        final Bus stevesBus = new Bus(3, 100000, true, 31);
-        final Tipper petersTipper = new Tipper(6, 80000, false, 15);
+    if(args.length >= 1)
+    {
+        final File inputFile = new File (args[0]);
+        try {
+            final InputStream inputStream = new FileInputStream(inputFile);
+            final Scanner scanner = new Scanner(inputStream);
 
-        //final InsurancePolicyCalculate calculate = InsurancePolicyCalculate.INSTANCE;
-        /*
-        final int joesInsurancePolicyCost = calculate.calculate(joesCar);
-        final int stevesInsurancePolicyCost = calculate.calculate(stevesBus);
-        final int petersInsurancePolicyCost = calculate.calculate(petersTipper);
-
-        //joesInsurancePolicyCost += joesCar.isDiesel() ? 500 : 0;
-        /*if(joesCar.isDiesel()){
-            joesInsurancePolicyCost +=500;
-        }*/
-
-       // final InsurancePolicyCalculate calculate = InsurancePolicyCalculate.INSTANCE
-
-
-        final InsurancePolicyCalculate calculate = InsurancePolicyCalculate.INSTANCE;
-
-        //final Formula CarBasicFormula = new CarBasicFormula();
-        //final Formula BusBasicFormula = new BusBasicFormula();
-        //final Formula TipperBasicFormula = new TipperBasicFormula();
-
-        final int joesInsurancePolicyCost = calculate.calculate(joesCar, FormulaEnum.CarBasicFormula);
-        final int stevesInsurancePolicyCost = calculate.calculate(stevesBus, FormulaEnum.BusBasicFormula);
-        final int petersInsurancePolicyCost =  calculate.calculate(petersTipper, FormulaEnum.TipperBasicFormula); //calculate.calculate(petersTipper, TipperBasicFormula);
-
-        System.out.println("Joe's policy cost is " + joesInsurancePolicyCost);
-        System.out.println("Steve's policy cost is " + stevesInsurancePolicyCost);
-        System.out.println("Peter's policy cost is " + petersInsurancePolicyCost);
+            while (scanner.hasNextLine()) {
+                System.out.println(scanner.nextLine());
+            }
+            scanner.close();
+        }
+            catch(FileNotFoundException noFileFound)
+            {
+                System.out.println(noFileFound.getMessage());
+            }
+    }
+        else {
+        System.out.println("Fara argumente");
+    }
     }
 }
