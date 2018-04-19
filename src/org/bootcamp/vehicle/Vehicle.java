@@ -4,13 +4,13 @@ public abstract class Vehicle {
     private int age;
     private long numberOfMiles;
     private boolean isDiesel;
-
+   // private String vehicleName;
     protected Vehicle()
     {
 
     }
 
-    protected Vehicle(int age, long numberOfMiles, boolean isDiesel) {
+    protected Vehicle( int age, long numberOfMiles, boolean isDiesel) {
         this.age = age;
         this.numberOfMiles = numberOfMiles;
         this.isDiesel = isDiesel;
@@ -19,6 +19,8 @@ public abstract class Vehicle {
     public int getAge() {
         return age;
     }
+
+   // public int getName() { return vehicleName;}
 
     public void setAge(int age) {
         this.age = age;

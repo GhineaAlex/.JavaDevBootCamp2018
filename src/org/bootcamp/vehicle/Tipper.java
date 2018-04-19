@@ -6,6 +6,10 @@ public final class Tipper extends Vehicle { //nu vom putea mosteni clasa respect
     public Tipper()
     {
     }
+    public Tipper(int age, long numberOfMiles, boolean isDiesel)
+    {
+        super(age, numberOfMiles, isDiesel);
+    }
     public Tipper(int age, long numberOfMiles, boolean isDiesel, int capacityInTons) {
         super(age, numberOfMiles, isDiesel);
         this.capacityInTons = capacityInTons;
