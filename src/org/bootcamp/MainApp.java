@@ -6,6 +6,8 @@ import org.bootcamp.vehicle.Bus;
 import org.bootcamp.vehicle.Car;
 import org.bootcamp.vehicle.Tipper;
 
+import org.bootcamp.formula.FormulaEnum;
+
 public class MainApp {
 
     public static void main(String[] args) {
@@ -24,15 +26,19 @@ public class MainApp {
         /*if(joesCar.isDiesel()){
             joesInsurancePolicyCost +=500;
         }*/
+
+       // final InsurancePolicyCalculate calculate = InsurancePolicyCalculate.INSTANCE
+
+
         final InsurancePolicyCalculate calculate = InsurancePolicyCalculate.INSTANCE;
 
-        final Formula CarBasicFormula = new CarBasicFormula();
-        final Formula BusBasicFormula = new BusBasicFormula();
-        final Formula TipperBasicFormula = new TipperBasicFormula();
+        //final Formula CarBasicFormula = new CarBasicFormula();
+        //final Formula BusBasicFormula = new BusBasicFormula();
+        //final Formula TipperBasicFormula = new TipperBasicFormula();
 
-        final int joesInsurancePolicyCost = calculate.calculate(joesCar, CarBasicFormula);
-        final int stevesInsurancePolicyCost = calculate.calculate(stevesBus, BusBasicFormula);
-        final int petersInsurancePolicyCost = calculate.calculate(petersTipper, TipperBasicFormula);
+        final int joesInsurancePolicyCost = calculate.calculate(joesCar, FormulaEnum.CarBasicFormula);
+        final int stevesInsurancePolicyCost = calculate.calculate(stevesBus, FormulaEnum.BusBasicFormula);
+        final int petersInsurancePolicyCost =  calculate.calculate(petersTipper, FormulaEnum.TipperBasicFormula); //calculate.calculate(petersTipper, TipperBasicFormula);
 
         System.out.println("Joe's policy cost is " + joesInsurancePolicyCost);
         System.out.println("Steve's policy cost is " + stevesInsurancePolicyCost);
