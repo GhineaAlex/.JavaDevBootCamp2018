@@ -15,6 +15,13 @@ public enum Formula {
         }
     },
 
+    CAR_CHRISTMAS_FORMULA{
+        @Override
+        public int calculate(Vehicle vehicle){
+            int cost_nou = (CAR_BASIC_FORMULA.calculate(vehicle)*100 - CAR_BASIC_FORMULA.calculate(vehicle)*5)/100;
+            return cost_nou;
+        }
+    },
     BUS_BASIC_FORMULA {
         @Override
         public int calculate(Vehicle vehicle) {
@@ -29,6 +36,13 @@ public enum Formula {
             return cost;
         }
     },
+    BUS_CHRISTMAS_FORMULA{
+      @Override
+      public int calculate(Vehicle vehicle){
+          int cost_nou = (BUS_BASIC_FORMULA.calculate(vehicle)*100 - BUS_BASIC_FORMULA.calculate(vehicle)*5)/100;
+          return cost_nou;
+      }
+    },
 
     TIPPER_BASIC_FORMULA {
         @Override
@@ -38,7 +52,14 @@ public enum Formula {
 
             return cost;
         }
-    };
+    },
 
+    TIPPER_CHRISTMAS_FORMULA {
+      @Override
+      public int calculate(Vehicle vehicle) {
+              int cost_nou = (TIPPER_BASIC_FORMULA.calculate(vehicle)*100 - TIPPER_BASIC_FORMULA.calculate(vehicle)*5)/100;
+              return cost_nou;
+      }
+    };
     public abstract int calculate(Vehicle vehicle);
 }

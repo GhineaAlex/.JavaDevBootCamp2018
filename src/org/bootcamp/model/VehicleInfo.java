@@ -43,4 +43,52 @@ public final class VehicleInfo {
     public boolean isDiesel() {
         return isDiesel;
     }
+
+    public static final class Builder {
+        private String id;
+        private String vehicleTypeName;
+        private String vehicleTypeFormula;
+        private int age;
+        private long numberOfMiles;
+        private boolean isDiesel;
+
+        private Builder() {
+        }
+
+        public Builder withId(String id)
+        {
+            this.id=id;
+            return this;
+        }
+
+        public Builder withVehicleTypeName(String vehicleTypeName) {
+            this.vehicleTypeName = vehicleTypeName;
+            return this;
+        }
+
+        public Builder getVehicleTypeFormula(String vehicleTypeName) {
+            this.vehicleTypeFormula = vehicleTypeFormula;
+            return this;
+        }
+
+        public Builder getAge(int age) {
+            this.age = age;
+            return this;
+        }
+
+        public Builder getNumberOfMiles(long numberOfMiles) {
+            this.numberOfMiles = numberOfMiles;
+            return this;
+        }
+
+        public Builder isDiesel(boolean Diesel) {
+            this.isDiesel = isDiesel;
+            return this;
+        }
+        public VehicleInfo build() {
+            return new VehicleInfo(this.id, this.vehicleTypeName, this.vehicleTypeFormula, this.age,
+                    this.numberOfMiles, this.isDiesel);
+        }
+    }
+
 }

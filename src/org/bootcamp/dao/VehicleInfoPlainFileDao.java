@@ -6,10 +6,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public final class VehicleInfoPlainFileDao implements VehicleInfoDao {
 
@@ -23,20 +20,19 @@ public final class VehicleInfoPlainFileDao implements VehicleInfoDao {
     private static final int VEHICLE_FORMULA = 2;
 
     private final String filePath;
+    private final Map<String, VehicleInfo> vehicleMap;
 
     public VehicleInfoPlainFileDao(String filePath) {
         this.filePath = filePath;
-    }
-
-    @Override
-    public List<VehicleInfo> getAllVehicles() {
-        final List<VehicleInfo> vehicles = new ArrayList<>();
+        this.vehicleMap = new HashMap<>();
 
         final File inputFile = new File(this.filePath);
 
         try {
             final InputStream inputStream = new FileInputStream(inputFile);
             final Scanner scanner = new Scanner(inputStream);
+
+
 
             while (scanner.hasNextLine()) {
                 final String line = scanner.nextLine();
@@ -46,8 +42,14 @@ public final class VehicleInfoPlainFileDao implements VehicleInfoDao {
                         tokens[VEHICLE_FORMULA], Integer.parseInt(tokens[VEHICLE_AGE]),
                         Long.parseLong(tokens[VEHICLE_MILES]), Boolean.parseBoolean(tokens[VEHICLE_IS_DIESEL]));
 
-                vehicles.add(info);
             }
+    }
+
+    @Override
+    public List<VehicleInfo> getAllVehicles() {
+        final List<VehicleInfo> vehicles = new ArrayList<>();
+
+
 
             scanner.close();
 
