@@ -1,4 +1,4 @@
-package service;
+package org.bootcamp.service;
 
 public class InsuranceCalculationResult {
 

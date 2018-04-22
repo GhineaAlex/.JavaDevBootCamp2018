@@ -1,7 +1,6 @@
 package org.bootcamp.model;
 
 public final class VehicleInfo {
-
     private String id;
     private String vehicleTypeName;
     private String vehicleTypeFormula;
@@ -9,8 +8,7 @@ public final class VehicleInfo {
     private long numberOfMiles;
     private boolean isDiesel;
 
-    public VehicleInfo(String id) {
-        this.id = id;
+    public VehicleInfo() {
     }
 
     public VehicleInfo(String id, String vehicleTypeName, String vehicleTypeFormula, int age, long numberOfMiles, boolean isDiesel) {
@@ -29,7 +27,6 @@ public final class VehicleInfo {
     public String getVehicleTypeName() {
         return vehicleTypeName;
     }
-
     public String getVehicleTypeFormula() {
         return vehicleTypeFormula;
     }
