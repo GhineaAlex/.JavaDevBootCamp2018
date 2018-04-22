@@ -1,7 +1,7 @@
 package org.bootcamp.service;
 
-public class InsuranceCalculationResult {
 
+public final class InsuranceCalculationResult {
     private final String id;
     private final int cost;
 

@@ -11,7 +11,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 
-public final class VehicleInfoPlainFileDao implements VehicleDao {
+public final class VehicleInfoPlainFileDao implements VehicleInfoDao {
 
     private static final String SEPARATOR = ";";
 
@@ -53,6 +53,7 @@ public final class VehicleInfoPlainFileDao implements VehicleDao {
 
         } catch (FileNotFoundException noFileFound) {
             return Collections.emptyList();
+            //System.out.println("Gol");
         }
 
         return vehicles;

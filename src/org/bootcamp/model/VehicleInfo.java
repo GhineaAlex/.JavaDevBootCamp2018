@@ -27,6 +27,7 @@ public final class VehicleInfo {
     public String getVehicleTypeName() {
         return vehicleTypeName;
     }
+
     public String getVehicleTypeFormula() {
         return vehicleTypeFormula;
     }

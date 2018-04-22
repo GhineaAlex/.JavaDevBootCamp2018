@@ -1,9 +1,9 @@
 package org.bootcamp.service;
 
-import org.bootcamp.calculate.InsurancePolicyCalculate;
-import org.bootcamp.dao.VehicleDao;
+import org.bootcamp.calculator.InsurancePolicyCalculator;
+import org.bootcamp.dao.VehicleInfoDao;
 import org.bootcamp.dao.VehicleInfoPlainFileDao;
-import org.bootcamp.formula.FormulaEnum;
+import org.bootcamp.formula.Formula;
 import org.bootcamp.model.VehicleInfo;
 import org.bootcamp.vehicle.Vehicle;
 import java.util.Collections;
@@ -20,9 +20,9 @@ public final class InsuranceCalculatorService {
     }
 
     public List<InsuranceCalculationResult> calculateAll() {
-        final InsurancePolicyCalculate calculator = InsurancePolicyCalculate.INSTANCE;
+        final InsurancePolicyCalculator calculator = InsurancePolicyCalculator.INSTANCE;
 
-        final VehicleDao vehicleInfoDao = new VehicleInfoPlainFileDao(this.filePath);
+        final VehicleInfoDao vehicleInfoDao = new VehicleInfoPlainFileDao(this.filePath);
 
         final List<VehicleInfo> vehicleInfos = vehicleInfoDao.getAllVehicles();
 
@@ -36,7 +36,7 @@ public final class InsuranceCalculatorService {
                 final Vehicle vehicle = getVehicle(info.getVehicleTypeName(), info.getAge(),
                         info.getNumberOfMiles(), info.isDiesel());
 
-                final FormulaEnum formula = FormulaEnum.valueOf(info.getVehicleTypeFormula());
+                final Formula formula = Formula.valueOf(info.getVehicleTypeFormula());
 
                 final int totalCost = calculator.calculate(vehicle, formula);
 

@@ -1,10 +1,10 @@
 package org.bootcamp.vehicle;
 
-public final class Car extends Vehicle { //nu vom putea mosteni clasa respectiva cu final
-    private String  transmission = "manual";
+public final class Car extends Vehicle {
+    private String transmission = "manual";
 
-    public Car()
-    {
+
+    public Car() {
     }
 
     public Car(int age, long numberOfMiles, boolean isDiesel) {
@@ -16,11 +16,11 @@ public final class Car extends Vehicle { //nu vom putea mosteni clasa respectiva
         this.transmission = transmission;
     }
 
-    public String getTransmision() {
+    public String getTransmission() {
         return transmission;
     }
 
-    public void setTransmision(String transmision) {
-        this.transmission = transmision;
+    public void setTransmission(String transmission) {
+        this.transmission = transmission;
     }
 }

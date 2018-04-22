@@ -1,9 +1,9 @@
 package org.bootcamp;
 
-import org.bootcamp.calculate.InsurancePolicyCalculate;
-import org.bootcamp.dao.VehicleDao;
+import org.bootcamp.calculator.InsurancePolicyCalculator;
+import org.bootcamp.dao.VehicleInfoDao;
 import org.bootcamp.dao.VehicleInfoPlainFileDao;
-import org.bootcamp.formula.FormulaEnum;
+import org.bootcamp.formula.Formula;
 import org.bootcamp.model.VehicleInfo;
 import org.bootcamp.service.InsuranceCalculationResult;
 import org.bootcamp.service.InsuranceCalculatorService;
@@ -28,7 +28,7 @@ public class MainApp {
     public static void main(String[] args) {
 
 
-        if (args.length >= 1) {
+        if (args.length > 0) {
             final InsuranceCalculatorService service = new InsuranceCalculatorService(args[0]);
             final List<InsuranceCalculationResult> resultList = service.calculateAll();
 
