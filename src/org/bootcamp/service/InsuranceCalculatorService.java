@@ -7,6 +7,7 @@ import org.bootcamp.formula.Formula;
 import org.bootcamp.model.VehicleInfo;
 import org.bootcamp.vehicle.Vehicle;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -14,17 +15,18 @@ import static org.bootcamp.service.ConversionUtils.getVehicle;
 
 public final class InsuranceCalculatorService {
     private String filePath;
+    final VehicleInfoDao vehicleInfoD;
 
     public InsuranceCalculatorService(String filePath) {
-        this.filePath = filePath;
+        this.vehicleInfoD = new VehicleInfoPlainFileDao(filePath);
     }
 
     public List<InsuranceCalculationResult> calculateAll() {
         final InsurancePolicyCalculator calculator = InsurancePolicyCalculator.INSTANCE;
 
-        final VehicleInfoDao vehicleInfoDao = new VehicleInfoPlainFileDao(this.filePath);
+        //final VehicleInfoDao vehicleInfoDao = new VehicleInfoPlainFileDao(this.filePath);
 
-        final List<VehicleInfo> vehicleInfos = vehicleInfoDao.getAllVehicles();
+        final List<VehicleInfo> vehicleInfos = vehicleInfoD.getAllVehicles();
 
         final List<InsuranceCalculationResult> resultList = new LinkedList<>();
 
@@ -40,7 +42,7 @@ public final class InsuranceCalculatorService {
 
                 final int totalCost = calculator.calculate(vehicle, formula);
 
-                final InsuranceCalculationResult result = new InsuranceCalculationResult(info.getId(), totalCost);
+                final InsuranceCalculationResult result = new InsuranceCalculationResult(info.getId(), totalCost, info.getVehicleTypeName());
 
                 resultList.add(result);
 
@@ -48,6 +50,35 @@ public final class InsuranceCalculatorService {
 
             return resultList;
         }
+
+    }
+
+    public InsuranceCalculationResult calculateById(String id) {
+
+        final InsurancePolicyCalculator calc = InsurancePolicyCalculator.INSTANCE;
+        final VehicleInfo vehicleInfo = vehicleInfoD.getVehicleInfoById(id);
+
+        final Vehicle vehicle = getVehicle(vehicleInfo.getVehicleTypeName(), vehicleInfo.getAge(), vehicleInfo.getNumberOfMiles(), vehicleInfo.isDiesel());
+        final Formula cost = Formula.valueOf(vehicleInfo.getVehicleTypeFormula());
+        final int total = calc.calculate(vehicle, cost);
+
+        InsuranceCalculationResult result = new InsuranceCalculationResult(vehicleInfo.getId(), total, vehicleInfo.getVehicleTypeName());
+
+        return result;
+    }
+
+    public List<InsuranceCalculationResult>  getCostsHigherThan(int cost){
+
+       List<InsuranceCalculationResult> calculationResults = this.calculateAll();
+        Iterator<InsuranceCalculationResult> iterator = calculationResults.iterator();
+
+        while(iterator.hasNext()){
+            InsuranceCalculationResult result = iterator.next();
+            if (result.getCost() < cost) {
+                iterator.remove();
+            }
+        }
+        return calculationResults;
 
     }
 
