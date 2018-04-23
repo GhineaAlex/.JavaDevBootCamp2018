@@ -15,7 +15,7 @@ import static org.bootcamp.service.ConversionUtils.getVehicle;
 
 public final class InsuranceCalculatorService {
     private String filePath;
-    final VehicleInfoDao vehicleInfoD;
+    private final VehicleInfoDao vehicleInfoD;
 
     public InsuranceCalculatorService(String filePath) {
         this.vehicleInfoD = new VehicleInfoPlainFileDao(filePath);
@@ -59,8 +59,8 @@ public final class InsuranceCalculatorService {
         final VehicleInfo vehicleInfo = vehicleInfoD.getVehicleInfoById(id);
 
         final Vehicle vehicle = getVehicle(vehicleInfo.getVehicleTypeName(), vehicleInfo.getAge(), vehicleInfo.getNumberOfMiles(), vehicleInfo.isDiesel());
-        final Formula cost = Formula.valueOf(vehicleInfo.getVehicleTypeFormula());
-        final int total = calc.calculate(vehicle, cost);
+        final Formula formula = Formula.valueOf(vehicleInfo.getVehicleTypeFormula());
+        final int total = calc.calculate(vehicle, formula);
 
         InsuranceCalculationResult result = new InsuranceCalculationResult(vehicleInfo.getId(), total, vehicleInfo.getVehicleTypeName());
 

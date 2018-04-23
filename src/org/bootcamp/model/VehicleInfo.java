@@ -8,9 +8,6 @@ public final class VehicleInfo {
     private long numberOfMiles;
     private boolean isDiesel;
 
-    public VehicleInfo() {
-    }
-
     public VehicleInfo(String id, String vehicleTypeName, String vehicleTypeFormula, int age, long numberOfMiles, boolean isDiesel) {
         this.id = id;
         this.vehicleTypeName = vehicleTypeName;
@@ -47,6 +44,7 @@ public final class VehicleInfo {
     public static Builder builder(){
         return new Builder();
     }
+
     public static final class Builder {
         private String id;
         private String vehicleTypeName;
