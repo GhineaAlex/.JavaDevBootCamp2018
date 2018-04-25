@@ -2,6 +2,8 @@ package org.bootcamp.service;
 
 import org.bootcamp.calculator.InsurancePolicyCalculator;
 import org.bootcamp.dao.VehicleInfoDao;
+import org.bootcamp.dao.VehicleInfoExcelFileDao;
+import org.bootcamp.dao.VehicleInfoJsonFileDao;
 import org.bootcamp.dao.VehicleInfoPlainFileDao;
 import org.bootcamp.formula.Formula;
 import org.bootcamp.model.VehicleInfo;
@@ -18,7 +20,7 @@ public final class InsuranceCalculatorService {
     private final VehicleInfoDao vehicleInfoD;
 
     public InsuranceCalculatorService(String filePath) {
-        this.vehicleInfoD = new VehicleInfoPlainFileDao(filePath);
+        this.vehicleInfoD = new VehicleInfoExcelFileDao(filePath);
     }
 
     public List<InsuranceCalculationResult> calculateAll() {

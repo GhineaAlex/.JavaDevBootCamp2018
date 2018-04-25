@@ -45,9 +45,9 @@ public final class VehicleInfoPlainFileDao implements VehicleInfoDao {
             }
             scanner.close();
         }
-            catch (FileNotFoundException er) {
-                    throw new IllegalStateException("Cannot create instance of class: " + VehicleInfoPlainFileDao.class.getSimpleName() );
-            }
+        catch (FileNotFoundException er) {
+            throw new IllegalStateException("Cannot create instance of class: " + VehicleInfoPlainFileDao.class.getSimpleName() );
+        }
     }
 
     @Override

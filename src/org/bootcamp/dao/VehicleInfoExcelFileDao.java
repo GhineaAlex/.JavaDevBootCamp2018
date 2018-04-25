@@ -31,55 +31,43 @@ public final class VehicleInfoExcelFileDao implements VehicleInfoDao {
     private static final int VEHICLE_IS_DIESEL = 5;
     private static final int VEHICLE_ID = 0;
     private static final int VEHICLE_FORMULA = 2;
-    private final String filePath;
-    private final Map<String, VehicleInfo> vehicleInfos;
-    private final Map<String, VehicleInfo> vehicleInfoMap  = new HashMap<>();
+    private String filePath;
+    Map<String, VehicleInfo> vehicleInfoMap = new HashMap<>();
 
     public VehicleInfoExcelFileDao(String filePath) {
-        this.vehicleInfos = new LinkedHashMap<>();
         this.filePath = filePath;
-            try {
-                final InputStream inputStream = new FileInputStream(filePath);
-                final Workbook workbook = new XSSFWorkbook(inputStream);
-                final Sheet datatypeSheet = workbook.getSheetAt(EXCEL_INFORMATION_SHEET);
-                final Iterator<Row> iterator = datatypeSheet.iterator();
-               // vehicleInfoMap = new HashMap<>();
-                while (iterator.hasNext()) {
+        try {
+            final FileInputStream inputStream = new FileInputStream(filePath);
+            final Workbook workbook = new XSSFWorkbook(inputStream);
+            final Sheet datatypeSheet = workbook.getSheetAt(EXCEL_INFORMATION_SHEET);
+            final Iterator<Row> iterator = datatypeSheet.iterator();
 
-                    Row currentRow = iterator.next();
-                    Iterator<Cell> cellIterator = currentRow.iterator();
+            while (iterator.hasNext()) {
 
-                    while (cellIterator.hasNext()) {
+                Row currentRow = iterator.next();
+                Iterator<Cell> cellIterator = currentRow.iterator();
+                final VehicleInfo.Builder builder = VehicleInfo.builder();
+                final VehicleInfo vehicle = builder.withId(cellIterator.next().getStringCellValue())
 
-                        Cell currentCell = cellIterator.next();
+                        .withVehicleTypeName(cellIterator.next().getStringCellValue())
 
-                        final VehicleInfo.Builder builder = VehicleInfo.builder();
-                        final VehicleInfo info = builder.withId(currentRow.getCell(VEHICLE_ID).getStringCellValue())
+                        .withVehicleTypeFormula(cellIterator.next().getStringCellValue())
 
-                                .withVehicleTypeName(currentRow.getCell(VEHICLE_TYPE).getStringCellValue())
+                        .withAge((int)cellIterator.next().getNumericCellValue())
 
-                                .withVehicleTypeFormula(currentRow.getCell(VEHICLE_FORMULA).getStringCellValue())
+                        .withNumberOfMiles((int)cellIterator.next().getNumericCellValue())
 
-                                .withAge((int) currentRow.getCell(VEHICLE_AGE).getNumericCellValue())
+                        .withIsDiesel(cellIterator.next().getBooleanCellValue()).build();
 
-                                .withNumberOfMiles((int)currentRow.getCell(VEHICLE_MILES).getNumericCellValue())
-
-                                .withIsDiesel(currentRow.getCell(VEHICLE_IS_DIESEL).getBooleanCellValue())
-                                .build();
-
-                        vehicleInfos.put(info.getId(), info);
-
-                        }
-
-                        }
-                    }
-            catch(FileNotFoundException er){
-                throw new IllegalStateException("Cannot create instance of class: " + VehicleInfoExcelFileDao.class.getSimpleName());
-                    } catch (IOException e) {
-                e.printStackTrace();
+                vehicleInfoMap.put(vehicle.getId(), vehicle);
             }
-    }
 
+        } catch (FileNotFoundException er) {
+            throw new IllegalStateException("Can not create instance of class VehicleExcelFileDao" + VehicleInfoExcelFileDao.class.getSimpleName());
+        } catch (IOException er) {
+            throw new IllegalStateException("Can not create instance of class VehicleExcelFileDao" );
+        }
+    }
         @Override
         public List<VehicleInfo> getAllVehicles() {
             /*List<VehicleInfo> vehicleInfoList = new ArrayList<>();
