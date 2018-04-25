@@ -21,18 +21,20 @@ public final class VehicleInfoJsonFileDao implements VehicleInfoDao {
     final private Map<String, VehicleInfo> vehicleInfoMap = new HashMap<>();
 
     public VehicleInfoJsonFileDao(String filePath){
+
+        // this.filePath = filePath;
         final ObjectMapper objectMapper = new ObjectMapper();
         List<VehicleInfo> vehicleInfoList;
         try {
+
             final InputStream inputStream = new FileInputStream(new File(filePath));
             vehicleInfoList = objectMapper.readValue(inputStream, objectMapper.getTypeFactory().constructCollectionType(List.class, VehicleInfo.class));
-            for (VehicleInfo info: vehicleInfoList) {
+            for (VehicleInfo info : vehicleInfoList) {
                 vehicleInfoMap.put(info.getId(), info);
             }
-        }catch(FileNotFoundException er){
-            //er.printStackTrace();
-            throw new IllegalStateException("Cannot create instance of class: " + VehicleInfoJsonFileDao.class.getSimpleName());
-        } catch (IOException er) {
+
+
+        }catch (IOException er) {
             er.printStackTrace();
         }
     }

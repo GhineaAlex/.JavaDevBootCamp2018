@@ -8,6 +8,7 @@ public final class VehicleInfo {
     private long numberOfMiles;
     private boolean isDiesel;
 
+
     public VehicleInfo(String id, String vehicleTypeName, String vehicleTypeFormula, int age, long numberOfMiles, boolean isDiesel) {
         this.id = id;
         this.vehicleTypeName = vehicleTypeName;

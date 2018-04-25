@@ -20,7 +20,7 @@ public final class InsuranceCalculatorService {
     private final VehicleInfoDao vehicleInfoD;
 
     public InsuranceCalculatorService(String filePath) {
-        this.vehicleInfoD = new VehicleInfoExcelFileDao(filePath);
+        this.vehicleInfoD = new VehicleInfoJsonFileDao(filePath);
     }
 
     public List<InsuranceCalculationResult> calculateAll() {
